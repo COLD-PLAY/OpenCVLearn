@@ -63,7 +63,7 @@ int showiterator() {
 }
 
 // read video
-int showvideo() {
+int showreadvideo() {
 	VideoCapture cap("vtest.avi");
 
 	if (!cap.isOpened()) {
@@ -82,18 +82,46 @@ int showvideo() {
 		if (frame.empty()) {
 			break;
 		}
-		// cvtColor(frame, edges, CV_BGR2GRAY);
-		// Canny(edges, edges, 0, 30, 3);
-		edges = frame;
+		cvtColor(frame, edges, CV_BGR2GRAY);
+		Canny(edges, edges, 0, 30, 3);
+		// edges = frame;
 
 		imshow("edges", edges);
 
+		// make delay
+		waitKey(100);
 		// wait for 30 seconds
-		if (waitKey(30) > 0) {
-			break;
-		}
+		// if (waitKey(30000) >= 0) {
+		// 	break;
+		// }
 	}
 	// it will free source automatically by cap after quit
+	return 0;
+}
+
+// write video
+int showwritevideo() {
+	Size s(320, 240);
+
+	VideoWriter writer = VideoWriter("myvideo.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25, s);
+
+	if (!writer.isOpened()) {
+		cerr << "cannot create video file." << endl;
+		return -1;
+	}
+
+	Mat frame(s, CV_8UC3);
+
+	for (int i = 0; i < 100; ++i) {
+		frame = Scalar::all(255);
+		char text[128];
+
+		snprintf(text, sizeof(text), "%dth", i);
+
+		putText(frame, text, Point(s.width/3, s.height/3), FONT_HERSHEY_SCRIPT_SIMPLEX, 3, Scalar(0, 255, 255), 3, 8);
+		// write the image into video
+		writer << frame;
+	}
 	return 0;
 }
 
@@ -144,7 +172,8 @@ int test() {
 int main(int argc, char **argv) {
 	// showat();
 	// showiterator();
-	showvideo();
+	// showreadvideo();
+	showwritevideo();
 
 	// test();
 } 
