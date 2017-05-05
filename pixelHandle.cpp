@@ -103,7 +103,7 @@ int showreadvideo() {
 int showwritevideo() {
 	Size s(320, 240);
 
-	VideoWriter writer = VideoWriter("myvideo.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25, s);
+	VideoWriter writer = VideoWriter("output/myvideo0.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25, s);
 
 	if (!writer.isOpened()) {
 		cerr << "cannot create video file." << endl;
@@ -128,7 +128,7 @@ int showwritevideo() {
 // my display
 int test() {
 	// Mat image(600, 800, CV_8UC3);
-	Mat image = imread("WindowsLogo.jpg");
+	// Mat image = imread("WindowsLogo.jpg");
 
 	// for (int i = 0; i < image.rows; ++i) {
 	// 	Vec3b *pixel = image.ptr<Vec3b>(i);
@@ -151,21 +151,43 @@ int test() {
 	// 	}
 	// }
 
-	if (image.empty()) {
-		cout << "cannot load iage." << endl;
-		return -1;
-	}
+	// if (image.empty()) {
+	// 	cout << "cannot load iage." << endl;
+	// 	return -1;
+	// }
 
-	Mat result;
-	Canny(image, result, 50, 150);
+	// Mat result;
+	// Canny(image, result, 50, 150);
 
 	// write it into windowslogl-canny.png
-	imwrite("WindowsLogo-canny.png", result);
+	// imwrite("WindowsLogo-canny.png", result);
 
 	// imshow("image", image);
-	imshow("result", result);
+	// imshow("result", result);
 
-	waitKey(0);
+	Size s(640, 480);
+	VideoWriter writer = VideoWriter("output/myvideo1.avi", CV_FOURCC('M', 'J', 'P', 'G'), 2, s);
+
+	for (int i = 1; i <= 14; ++i) {
+		string imagename;
+
+		stringstream stream;
+		stream << "data/left" << i << ".jpg";
+
+		stream >> imagename;
+
+		Mat frame = imread(imagename);
+
+		if (frame.empty()) {
+			cout << "cannot load image." << endl;
+			break;
+		}
+
+		writer << frame;
+	}
+
+	// waitKey(0);
+
 	return 0;
 }
 
@@ -173,7 +195,7 @@ int main(int argc, char **argv) {
 	// showat();
 	// showiterator();
 	// showreadvideo();
-	showwritevideo();
+	// showwritevideo();
 
-	// test();
+	test();
 } 
