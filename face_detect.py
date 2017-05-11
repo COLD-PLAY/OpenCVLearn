@@ -52,6 +52,7 @@ if __name__ == '__main__':
 	imagePath = 'test0.png'
 	# imagePath = 'test1.jpg'
 	# imagePath = 'test2.jpg'
+	# imagePath = '/home/coldplay/Desktop/wifi.jpg'
 	faceCascPath = 'haarcascade_frontalface_alt.xml'
 	eyeCascPath = 'haarcascade_eye.xml'
 	facedetect(imagePath, faceCascPath, eyeCascPath);
