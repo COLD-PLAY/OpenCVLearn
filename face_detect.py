@@ -49,10 +49,13 @@ if __name__ == '__main__':
 	# imagePath = sys.argv[1]
 	# cascPath = sys.argv[2]
 
-	imagePath = 'test0.png'
+	# imagePath = 'test0.png'
 	# imagePath = 'test1.jpg'
 	# imagePath = 'test2.jpg'
-	# imagePath = '/home/coldplay/Desktop/wifi.jpg'
+	# imagePath = 'data/beauty.jpg'
+	# imagePath = 'data/beauty_boy.jpg'
+	imagePath = 'data/handsome.jpg'
+	
 	faceCascPath = 'haarcascade_frontalface_alt.xml'
 	eyeCascPath = 'haarcascade_eye.xml'
 	facedetect(imagePath, faceCascPath, eyeCascPath);
